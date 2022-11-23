@@ -3,7 +3,6 @@ import React from 'react';
 import logo from "./images/logo.png"
 import homeIcon from './images/home.png'
 import searchIcon from './images/search.png'
-import exploreIcon from './images/explore.png'
 import messageIcon from './images/messenger.png'
 import heartIcon from './images/heart.png'
 import createIcon from './images/create.png'
@@ -86,9 +85,6 @@ function App() {
                         <img src={searchIcon} className={'min-icon'} alt="Search"/>
                     </div>
                    <div className={'min-single-category'}>
-                        <img src={exploreIcon} className={'min-icon'} alt="Explore"/>
-                    </div>
-                   <div className={'min-single-category'}>
                         <img src={messageIcon} className={'min-icon'} alt="Messages"/>
                     </div>
                    <div className={'min-single-category'}>
@@ -109,6 +105,29 @@ function App() {
                    </div>
                </div>
             </div>
+
+          <div className={'notification-part'}>
+                <div className={'notification-section'}>
+                    Notifications
+                </div>
+              <div className={'section-of-notifications'}>
+                <div className={'single-notification'}>
+                    <img src={userIcon} alt="User"/>
+                    <span style={{fontWeight:'bold'}}>UserName</span>
+                    <span>started following you</span>
+                </div>
+                  <div className={'single-notification'}>
+                      <img src={userIcon} alt="User"/>
+                      <span style={{fontWeight:'bold'}}>UserName</span>
+                      <span>started following you</span>
+                  </div>
+                  <div className={'single-notification'}>
+                      <img src={userIcon} alt="User"/>
+                      <span style={{fontWeight:'bold'}}>UserName</span>
+                      <span>started following you</span>
+                  </div>
+              </div>
+          </div>
       </>
   );
 }

@@ -1,6 +1,7 @@
 body{
     margin: 0;
     padding: 0;
+    font-family: "arial", serif;
 }
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -66,9 +67,11 @@ body{
 /*2*---------------------------------------------------------------------------------------------------------------------------------*/
 
 .min-bar{
-    width: 65px;
+    width: 70px;
     height: 100vh;
     position: fixed;
+    background: white;
+    z-index: 3;
     border-right: 1px solid rgb(202, 202, 202);
     box-shadow: 0 0 4px black;
 }
@@ -118,4 +121,41 @@ body{
 
 .min-menu-part{
     margin-top: 8vh;
+}
+
+.notification-part{
+    width: 400px;
+    height: 100vh;
+    margin-left: 70px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-right: 1px solid rgb(202, 202, 202);
+    box-shadow: 0 0 4px black;
+}
+
+.notification-section{
+    height: 12vh;
+    line-height: 10vh;
+    padding-left: 25px;
+    font-size: 25px;
+    border-bottom: 2px solid rgb(202, 202, 202);
+}
+
+.section-of-notifications{
+    height: 88vh;
+    overflow: auto;
+}
+
+.single-notification{
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 1vh 0;
+    border-bottom: 2px solid rgb(202, 202, 202);
+}
+
+.section-of-notifications img{
+    height: 50px;
 }
