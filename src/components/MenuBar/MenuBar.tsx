@@ -1,98 +1,164 @@
 import './MenuBar.css'
-
 import logo from "../../images/logo.png"
-import homeIcon from '../../images/home.png'
-import searchIcon from '../../images/search.png'
-import messageIcon from '../../images/messenger.png'
-import heartIcon from '../../images/heart.png'
-import createIcon from '../../images/create.png'
-import userIcon from '../../images/user.png'
-import menuIcon from '../../images/menu.png'
+import homeIcon from "../../images/home.png"
+import homeIconBold from "../../images/homeBold.png"
+import searchIcon from "../../images/search.png";
+import searchIconBold from "../../images/searchBold.png";
+import messageIcon from "../../images/messenger.png";
+import messageIconBold from "../../images/messengerBold.png";
+import notificationIcon from "../../images/heart.png";
+import notificationIconBold from "../../images/heartBold.png";
+import createIcon from "../../images/create.png";
+import createIconBold from "../../images/createBold.png";
+import userIcon from "../../images/user.png";
+import userIconBold from "../../images/userBold.png";
+import menuIcon from "../../images/menu.png";
+import menuIconBold from "../../images/menuBold.png";
+import instagramIcon from "../../images/instagram.png"
+import {useTranslation} from "react-i18next";
+import Category from "../Category";
+import React, {useState} from "react";
+import CategoryMin from "../CategoryMin";
+import {useNavigate} from "react-router-dom";
 
-
-import instaIcon from '../../images/instagram.png'//min-bar
 
 const MenuBar = () =>{
+
+    const categoryParts = [
+        {
+            img: homeIcon,
+            imgBold: homeIconBold,
+            text: "Home",
+            id: 1,
+            isActive: true,
+            path:'/',
+            isRoutable:true
+        },
+        {
+            img: searchIcon,
+            imgBold: searchIconBold,
+            text: "Search",
+            id: 2,
+            isActive: false,
+            path:'/',
+            isRoutable:false
+        },
+        {
+            img: messageIcon,
+            imgBold: messageIconBold,
+            text: "Messages",
+            id: 3,
+            isActive: false,
+            path:'/messages',
+            isRoutable:true
+        },
+        {
+            img: notificationIcon,
+            imgBold: notificationIconBold,
+            text: "Notification",
+            id: 4,
+            isActive: false,
+            path:'/',
+            isRoutable:false
+        },
+        {
+            img: createIcon,
+            imgBold: createIconBold,
+            text: "Create",
+            id: 5,
+            isActive: false,
+            path:'/',
+            isRoutable:false
+        },
+        {
+            img: userIcon,
+            imgBold: userIconBold,
+            text: "Profile",
+            id: 6,
+            isActive: false,
+            path:'/profile',
+            isRoutable:true
+        },
+    ]
+
+    const [category, setCategory] = useState(categoryParts)
+    const [categoryMin, setCategoryMin] = useState(categoryParts)
+    const [language, setLanguage] = useState(false)
+    const {t,i18n} = useTranslation();
+    const navigate = useNavigate()
+
+
+
+    const handleActiveClick = (id: number) => {
+        setCategory(prevState => prevState.map(elem => {
+            if (elem.id === id) {
+                if (!elem.isActive){
+                    elem.isActive = true
+                }
+            }else {
+                elem.isActive = false
+            }
+            return elem
+        }))
+    }
+
+    const handleRouteClick = (route: string) => {
+        navigate(route)
+    }
+
     return(
         <>
             <div className={'app_bar'}>
                            <div className={'logo-part'}>
                                <img src={logo} alt=""/>
                            </div>
-
                            <div className={'category-part'}>
-
-                               <div className={'single-category'}>
-                                   <div className={'category-icon'}><img src={homeIcon} className={'category-image'} alt="Home"/></div>
-                                   <div>Home</div>
-                              </div>
-
-                               <div className={'single-category'}>
-                                   <div className={'category-icon'}><img src={searchIcon} className={'category-image'} alt=""/></div>
-                                   <div>Search</div>
-                               </div>
-
-                               <div className={'single-category'}>
-                                   <div className={'category-icon'}><img src={messageIcon} className={'category-image'} alt=""/></div>
-                                   <div>Messages</div>
-                               </div>
-
-                               <div className={'single-category'}>
-                                   <div className={'category-icon'}><img src={heartIcon} className={'category-image'} alt=""/></div>
-                                   <div>Notifications</div>
-                               </div>
-
-                               <div className={'single-category'}>
-                                   <div className={'category-icon'}><img src={createIcon} className={'category-image'} alt=""/></div>
-                                   <div>Create</div>
-                               </div>
-
-                               <div className={'single-category'}>
-                                   <div className={'category-icon'}><img src={userIcon} className={'category-image'} alt=""/></div>
-                                   <div>Profile</div>
-                               </div>
+                               {category.map(elem=> <Category
+                                                        key={elem.id} imgSrcBold={elem.imgBold} pathRoute={elem.path}
+                                                        handleActiveClick={handleActiveClick} id={elem.id}
+                                                        text={elem.text} imgSrc={elem.img} isActive={elem.isActive}
+                                                        isItRoutable={elem.isRoutable} onClick={handleRouteClick}/>)}
                            </div>
-
-                           <div className={'single-category'}>
-                               <div className={'category-icon'}><img src={menuIcon} className={'category-image'} alt=""/></div>
-                               <div>More</div>
-                           </div>
+                            <Category
+                                text={'More'} id={7} imgSrcBold={menuIconBold} pathRoute={'/'}
+                                handleActiveClick={() => {}} imgSrc={menuIcon}
+                                isItRoutable={false} isActive={false} onClick={() => {}}/>
+                            <div>
+                                <button onClick={() => {
+                                    setLanguage(!language)
+                                    return i18n.changeLanguage(language ? 'en' : 'hy')
+                                }}>{!language ? 'Change Language Test' : 'Փոխել լեզւն'}</button>
+                            </div>
                        </div>
+
+
 
 
             <div className={'min-bar'}>
                 <div className={'min-logo-part'}>
-                    <img src={instaIcon} alt="Logo"/>
+                    <img src={instagramIcon} alt="Logo"/>
                 </div>
 
                 <div className={'min-category-part'}>
-                    <div className={'min-single-category'}>
-                        <img src={homeIcon} className={'min-icon'} alt="Home"/>
-                    </div>
-                    <div className={'min-single-category'}>
-                        <img src={searchIcon} className={'min-icon'} alt="Search"/>
-                    </div>
-                    <div className={'min-single-category'}>
-                        <img src={messageIcon} className={'min-icon'} alt="Messages"/>
-                    </div>
-                    <div className={'min-single-category'}>
-                        <img src={heartIcon} className={'min-icon'} alt="Notifications"/>
-                    </div>
-                    <div className={'min-single-category'}>
-                        <img src={createIcon} className={'min-icon'} alt="Create"/>
-                    </div>
-                    <div className={'min-single-category'}>
-                        <img src={userIcon} className={'min-icon'} alt="User"/>
-                    </div>
-
+                    {categoryMin.map(elem=> {
+                        return <CategoryMin
+                            key={elem.id} id={elem.id} isItRoutable={elem.isRoutable}  pathRoute={elem.path}
+                            handleActiveClick={handleActiveClick} imgSrcBold={elem.imgBold}
+                            imgSrc={elem.img} isActive={elem.isActive} onClick={handleRouteClick}/>
+                    })}
                 </div>
-
                 <div className={'min-menu-part'}>
-                    <div className={'min-single-category'}>
-                        <img src={menuIcon} className={'min-icon'} alt="Menu"/>
-                    </div>
+                    <CategoryMin
+                        imgSrc={menuIcon} isItRoutable={false}  pathRoute='/'
+                        imgSrcBold={messageIconBold} id={71}
+                        handleActiveClick={() => {}} isActive={false} onClick={() => {}}/>
                 </div>
             </div>
+
+
+
+
+
 
             {/*notification part-----------------------------------------------------------------------------------------*/}
 
